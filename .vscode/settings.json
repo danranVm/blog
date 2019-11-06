@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "editor.rulers": [100],
+  "editor.renderWhitespace": "all",
+  "editor.tabSize": 2,
+  "editor.minimap.enabled": false,
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "html.format.wrapLineLength": 100
+}

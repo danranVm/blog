@@ -1,0 +1,24 @@
+{
+  "name": "danranvm.github.io",
+  "title": "Vm Blog",
+  "author": "danranVm <danranvm@gmail.com>",
+  "version": "1.0.0",
+  "homepage": "http://danranvm.github.io/blog",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danranvm/danranvm.github.io"
+  },
+  "bugs": "https://github.com/danranvm/danranvm.github.io/issues",
+  "description": "",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "dependencies": {
+    "vuepress": "^1.2.0",
+    "@vuepress/plugin-google-analytics": "^1.2.0",
+    "@vuepress/plugin-medium-zoom": "1.2.0",
+    "@vuepress/plugin-pwa": "^1.2.0",
+    "vuepress-theme-reco": "^1.1.1"
+  }
+}
