@@ -4,8 +4,8 @@ date: 2019-03-02
 categories:
   - Angular
 tags:
-  - angular
-  - rxjs
+  - Angular
+  - Rxjs
 ---
 
 ::: tip

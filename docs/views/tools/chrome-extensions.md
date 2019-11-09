@@ -4,8 +4,8 @@ date: 2018-09-26
 categories:
   - Tools
 tags:
-  - chrome
-  - extensions
+  - Chrome
+  - Extensions
 ---
 
 ::: tip

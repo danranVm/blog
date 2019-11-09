@@ -4,9 +4,9 @@ date: 2018-09-25
 categories:
   - Tools
 tags:
-  - macOS
-  - tools
-  - extensions
+  - MacOS
+  - Tools
+  - Extensions
 ---
 
 ::: tip

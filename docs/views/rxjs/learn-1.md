@@ -4,9 +4,9 @@ date: 2018-09-14
 categories:
   - RxJS
 tags:
-  - rxjs
-  - promise
-  - javascript
+  - Rxjs
+  - Promise
+  - Javascript
 ---
 
 ::: tip
