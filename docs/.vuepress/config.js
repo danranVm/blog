@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Vm Blog',
-  description: '勿忘初心 方得始终',
+  description: '一只喜欢编程和数码产品的程序猿',
   dest: 'dist',
   locales: { '/': { lang: 'zh-cmn-Hans' } },
   head: [
@@ -38,7 +38,8 @@ module.exports = {
           },
           {
             text: '微信',
-            link: '',
+            link:
+              'https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/mmqrcode1575827186558.png',
             icon: 'reco-wechat',
           },
         ],
