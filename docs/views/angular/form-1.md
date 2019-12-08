@@ -1,7 +1,7 @@
 ---
-title: Angular 自定义表单组件
-date: 2019-08-04
-next: ./source-code-of-the-form
+title: 自定义表单组件 - Angular Form 三连(一)
+date: 2019-12-07
+next: ./form-2
 categories:
   - Angular
 tags:
@@ -12,17 +12,17 @@ tags:
 ::: tip
 首先我们应该知道在 Angular 中，表单组件应该有哪些特性：
 
-- view <==> model 的双向绑定
-- 支持 template-form & reactive-form
-- 支持表单验证
-- 组件状态的控制，用于 CSS 类映射到组件所在的元素
+- view <==> model 双向绑定
+- template-form & reactive-form
+- 表单验证: Validators
+- 表单状态: VALID, INVALID, PENDING, DISABLED...
 
 现在，我们来实现它们。
 :::
 
 <!-- more -->
 
-## view <==> model 的双向绑定
+## view <==> model 双向绑定
 
 首先，我想说的是，Angular 中的双向绑定只不过是一个输入和输出的语法糖。
 
@@ -67,7 +67,7 @@ export class AppComponent {
 
 当你输入新的值时，观察控制台的输出，就会是你输入后的新值。
 
-## 支持 template-form & reactive-form
+## template-form & reactive-form
 
 在 Angular 中，表单组件又分为模板驱动表单和响应式表单，我们的 `MyInput2` 组件需要都支持它们的使用方式。
 
@@ -92,7 +92,7 @@ const accessorProvide = {
 export class MyInput2Component implements ControlValueAccessor {}
 ```
 
-然后编辑器就回提示我们需要去实现 `ControlValueAccessor` 中的方法，使用 vscode 的快速修复快捷键，会自动为我们创建所需要实现的方法。
+然后编辑器就回提示我们需要去实现 `ControlValueAccessor` 中的方法，使用 vscode 的快速修复快捷键(`command + .`)，会自动为我们创建所需要实现的方法。
 
 ```ts
 writeValue(obj: any): void // 当 model 发生改变时，触发该方法。
@@ -101,7 +101,7 @@ registerOnTouched(fn: any): void // 注册 onTouched 事件
 setDisabledState?(isDisabled: boolean): void // 设置组件的禁用状态，可选实现。
 ```
 
-注：关于 `NG_VALUE_ACCESSOR` 令牌 ，下篇文章[Angular 表单的源码解读](./source-code-of-the-form.md)将为你详细介绍。
+注：关于 `NG_VALUE_ACCESSOR` 令牌 和 `ControlValueAccessor` 接口，下篇文章《表单源码解读》读将为你详细介绍。
 
 #### 实现 `ControlValueAccessor` 的方法
 
@@ -115,8 +115,6 @@ export class MyInput2Component implements ControlValueAccessor {
 
   writeValue(value: string): void {
     this.value = value
-    // 如果你使用的是 OnPush 策略，别忘了下面一行代码
-    // this.changeDetectorRef.markForCheck()
   }
 
   registerOnChange(fn: any): void {
@@ -129,8 +127,6 @@ export class MyInput2Component implements ControlValueAccessor {
 
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled
-    // 如果你使用的是 OnPush 策略，别忘了下面一行代码
-    // this.changeDetectorRef.markForCheck()
   }
 }
 ```
@@ -175,7 +171,7 @@ export class AppComponent {
 
 当你修改第三个输入框的值时，你会发现其他两个输入框的值也发生了改变。
 
-## 表单验证和状态控制
+## 表单验证和表单状态
 
 其实当我们实现了 `ControlValueAccessor` 接口的时候，这两个特性就已经实现了。
 
@@ -193,14 +189,14 @@ this.validControl = fb.control(this.value, [required, minLength(4)])
 
 ```less
 // styles.less
-.ng-touched.ng-invalid input {
+.ng-invalid input {
   color: red;
 }
 ```
 
 你会发现它们如期运行。更多的验证器和其他状态的 CSS class 参见[官方文档](https://www.angular.cn/guide/form-validation)
 
-## 组件内的自定义验证
+### 自定义验证器
 
 假如我需要让组件只能输入一个 0-9999 数字，输入其他值都是无效的。这个时候我们需要提供 `NG_VALIDATORS` 令牌即可。
 
@@ -210,7 +206,7 @@ this.validControl = fb.control(this.value, [required, minLength(4)])
 const defaultMaxValue = 9999
 const defaultMinValue = 0
 const validateRange = (control: AbstractControl): ValidationErrors => {
-  const value = control.value
+  const value = parseFloat(control.value)
   const max = defaultMaxValue
   const min = defaultMinValue
   const isValid = value > max || value < min
@@ -238,7 +234,7 @@ const validatorProvide = {
 export class MyInput3Component implements ControlValueAccessor {}
 ```
 
-假如你还需要更好的灵活性，例如你可以让父组件来设置你的最大值和最小值。那你只需要再去实现 `Validator` 即可。
+假如你还需要更好的灵活性，例如你可以让父组件来设置你的最大值和最小值。那你只需要再去实现 `Validator` 接口即可。
 
 ```ts
 validate(control: AbstractControl): ValidationErrors // 自定义验证函数
@@ -275,7 +271,7 @@ export class MyInput4Component implements ControlValueAccessor, Validator {
   private onValidatorChange = () => {}
 
   validate(control: AbstractControl): ValidationErrors {
-    const value = control.value
+    const value = parseFloat(control.value)
     const { max, min } = this
     const isValid = value > max || value < min
     return isValid ? null : { range: { value, max, min } }
@@ -287,10 +283,12 @@ export class MyInput4Component implements ControlValueAccessor, Validator {
 }
 ```
 
-## 更多的 CSS class 控制
+### 自定义 class 控制
 
 可以参考 NG-ZORRO 的实现：[NzFormControlComponent.setControlClassMap](https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/form/nz-form-control.component.ts#L120)
 
-## 本文所有完整代码
+## 更多
 
-github: [customized-form-component](https://github.com/danranVm/angular-example/tree/master/customized-form-component)
+- 本文所有完整代码: [stackblitz](https://stackblitz.com/edit/angular-danranvm-form-1?file=src/app/my-input.component.ts)
+- [表单源码解读 - Angular Form 三连(二)](./form-2.md)
+- [使用指令增强 - Angular Form 三连(三)](./form-3.md)

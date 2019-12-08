@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Vm Blog',
-  description: '淡然Vm的个人博客',
+  description: '勿忘初心 方得始终',
   dest: 'dist',
   locales: { '/': { lang: 'zh-cmn-Hans' } },
   head: [
@@ -44,6 +44,21 @@ module.exports = {
         ],
       },
     ],
+    friendLink: [
+      {
+        title: '午后南杂',
+        desc: 'Enjoy when you can, and endure when you must.',
+        email: 'recoluan@qq.com',
+        link: 'https://www.recoluan.com',
+      },
+      {
+        title: '有梦想的咸鱼',
+        desc: '我不能克制我记几',
+        link: 'https://blog.liudongyang.top',
+        email: '',
+        logo: 'https://blog.liudongyang.top/blog-logo.jpg',
+      },
+    ],
     // 博客设置
     blogConfig: {
       category: {
@@ -64,7 +79,7 @@ module.exports = {
     // 最后更新时间
     lastUpdated: '上次更新',
     // 作者
-    author: '淡然Vm',
+    author: 'danranVm',
     // 项目开始时间
     startYear: '2018',
     /**
@@ -83,6 +98,7 @@ module.exports = {
       placeholder: '填写邮箱可以收到回复提醒哦！',
       notify: true,
       recordIP: true,
+      hideListAccessNumber: true,
     },
   },
   markdown: {

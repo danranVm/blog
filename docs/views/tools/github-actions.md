@@ -9,19 +9,19 @@ tags:
 ---
 
 ::: tip
-[Github Actions](https://github.com/features/actions) 是 Github 推出的持续集成服务。
-它功能强大，使用简单，本文演示了如何自动化构建发布一个应用到 Github Pages 或者你的远程服务器。
+[Github Actions](https://github.com/features/actions) 是 Github 推出的持续集成服务。  
+它功能强大，使用简单，本文演示了如何自动化构建及部署一个应用到 Github Pages 或者你的远程服务器。
 :::
 
 <!-- more -->
 
 ## 前言
 
-说起持续集成服务，大家都知道 [Travis](https://travis-ci.org/), 我本来也是打算使用 Travis 来自动化部署[我的博客](https://blog.danran.site), 但是每次打开 Travis 都慢到爆炸，然后正好看到了 Actions 的介绍，于是就体验了一番。相对来说，它更加的快捷（无论是访问速度还是构建速度）也和 Github 结合得更好，使用更为方便。
+说起持续集成服务，大家都知道 [Travis](https://travis-ci.org/), 我本来也是打算使用 Travis 来自动化部署[我的博客](https://blog.danran.site), 但是每次打开 Travis 都慢到爆炸，然后正好看到了 Actions 的介绍，于是就体验了一番。相对来说，它更加的快捷（无论是访问速度还是构建速度）也和 Github 结合得更好，更方便使用。
 
 ## 注册
 
-由于 Actions 还没有正式发布（据说 13 号发布），所以需要到 <https://github.com/features/actions/signup> 进行注册。注册成功后，就可以在你的仓库中看到 Actions。
+由于 Actions 还没有正式发布，所以需要到 <https://github.com/features/actions/signup> 进行注册。注册成功后，就可以在你的仓库中看到 Actions。
 
 ![Actions Icon](https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/20191109173238.png)
 
@@ -29,7 +29,7 @@ tags:
 
 ### 创建工作流
 
-看到上述 Actions 图标后，点击进入创建工作流界面， 可以看到 Github 给我们提供了一些模板，我们随意点击其中一个 `Set up this workflow` , 就会在我们仓库的 `.github/workflows` 目录下创建一个 `xxx.yml` 文件, 内容如下（不同的模板有所需区别）：
+看到上述 Actions 图标后，点击进入创建工作流界面， 可以看到 Github 给我们提供了一些模板，我们随意点击其中一个 `Set up this workflow` , 就会在我们仓库的 `.github/workflows` 目录下创建一个 `xxx.yml` 文件, 内容如下（不同的模板有所区别）：
 
 ```yml
 name: CI # 工作流名称，任意自定义
@@ -97,7 +97,7 @@ jobs:
 
 ### 远程服务器部署
 
-根 Github Pages 不同的是，远程服务器部署不需要 Github Token, 而是需要通过 SSH 进行上传文件, 所以需要在 `Settings/Secrets` 中配置 `HOST` `USERNAME` `PASSWORD` 等参数。
+与 Github Pages 不同的是，远程服务器部署不需要 Github Token, 而是需要通过 SSH 进行上传文件, 所以需要在 `Settings/Secrets` 中配置 `HOST` `USERNAME` `PASSWORD` 等参数。
 
 ![Settings Secrets](https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/20191109184914.png)
 
@@ -131,7 +131,7 @@ jobs:
           strip_components: 1 # 如果不配置该参数，上传后的目录结构就是 nginx/html/blog/dist
 ```
 
-这里我们使用了 `actions/checkout`, `actions/setup-node` 和 `appleboy/scp-action` 三个 action 分别做了下载，构建和上传的操作。
+这里我们使用了 `actions/checkout`, `actions/setup-node` 和 `appleboy/scp-action` 三个 action 分别做了下载，准备 Node 环境和上传的操作。
 
 ## 相关资料
 

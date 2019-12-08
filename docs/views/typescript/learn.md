@@ -4,8 +4,7 @@ date: 2018-10-15
 categories:
   - TypeScript
 tags:
-  - typescript
-  - javascript
+  - Typescript
 ---
 
 ::: tip
@@ -21,10 +20,10 @@ tags:
 > 3. 代码重构
 > 4. 可读性
 >
-> [知乎优秀回答](https://www.zhihu.com/question/28016252/answer/39056940)
+> [知乎回答](https://www.zhihu.com/question/28016252/answer/39056940)
 
 ## 前言
 
-本文只是用于我的一个学习笔记，只针对我个人觉得有意思的知识点，只具备一些学习 ts 的参考性。
+本文只是用于我的一个学习笔记，只针对我个人觉得有意思的知识点。
 
 ## [TypeScript 中文网](https://www.tslang.cn/docs/home.html)

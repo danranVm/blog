@@ -1,6 +1,8 @@
 ---
-title: Angular Form 源码解读
-date: 2019-08-07
+title: 表单源码解读 - Angular Form 三连(二)
+date: 2019-12-08
+prev: ./form-1
+next: ./form-3
 categories:
   - Angular
 tags:
@@ -9,7 +11,7 @@ tags:
 ---
 
 ::: tip
-在上篇文章[Angular 自定义表单组件](./customize-form-component.md)中，我们知道了只需要提供 `NG_VALUE_ACCESSOR` 令牌并实现`ControlValueAccessor` 接口，就可以让我们的组件有了表单的各种能力。
+在上篇文章《自定义表单组件》中，我们知道了只需要提供 `NG_VALUE_ACCESSOR` 令牌并实现`ControlValueAccessor` 接口，就可以让我们的组件有了表单的各种能力。
 
 首先，我们来思考两个问题：
 
@@ -48,7 +50,7 @@ export interface ControlValueAccessor {
 
 从 `description` 中我们得到了一个很重要的信息，它是作为 Angular 表单 API 和 DOM 中的原生元素之间的桥梁。我们大概可以得到这样一个模型。
 
-![ControlValueAccessor流程图](./images/ControlValueAccessor.png)
+![ControlValueAccessor流程图](https://cdn.jsdelivr.net/gh/danranvm/image-hosting/images/ControlValueAccessor.png)
 
 查看[官方文档](https://www.angular.cn/api/forms/ControlValueAccessor#controlvalueaccessor)可以得知 Angular 针对不同的原生表单元素总共内置了以下 7 种实现：
 
@@ -208,7 +210,7 @@ export function setUpControl(control: FormControl, dir: NgControl): void {
   }
   ```
 
-  - 当我们在组件中调用 `onChange(value)` ,执行的就是这个函数种地回调。
+  - 当我们在组件中调用 `onChange(value)` ,执行的就是这个函数中的回调。
 
 - 调用 `setUpModelChangePipeline(control, dir)` 注册 `FormControl` 的 `onChang`
 
@@ -224,7 +226,7 @@ export function setUpControl(control: FormControl, dir: NgControl): void {
   }
   ```
 
-  - 当我们在**父**组件中调用 `this.valueControl.setValue('xxx')`, 执行的就是这个函数的回调。
+  - 当我们在**父**组件中调用 `this.valueControl.setValue('xxx')`, 执行的就是这个函数中的回调。
 
 - 调用 `setUpBlurPipeline(control, dir)` 注册 `valueAccessor` 的 `onTouched`
 
@@ -259,3 +261,8 @@ export function setUpControl(control: FormControl, dir: NgControl): void {
 注 2： 默认的 CSS class 映射是通过 [`NgControlStatus`指令](https://github.com/angular/angular/blob/master/packages/forms/src/directives/ng_control_status.ts#L62)获得。
 
 有兴趣的同学可以自行了解。
+
+## 更多
+
+- [自定义表单组件 - Angular Form 三连(一)](./form-1.md)
+- [使用指令增强 - Angular Form 三连(三)](./form-3.md)
