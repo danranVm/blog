@@ -22,7 +22,7 @@ Angular 使用指令让原生表单 DOM 有了一系列能力，那么我们是�
 
 ```html
 <!-- https://angular.io/guide/form-validation#template-driven-validation -->
-<input id="name" class="form-control" formControlName="name" required />
+<input id="name" class="form-control" formControlName="name" />
 
 <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
   <div *ngIf="name.errors.required">
@@ -43,7 +43,7 @@ oh,shit! 这可真是这个操蛋的事情！
 ```html
 <nz-form-item>
   <nz-form-control nzErrorTip="Input is required">
-    <input nz-input formControlName="required" required />
+    <input nz-input formControlName="required" />
   </nz-form-control>
 </nz-form-item>
 <nz-form-item>
@@ -96,7 +96,7 @@ oh~no! 这还不够酷！
 
 知道问题所在，以及期望的样子。那么，就是现在，让我们把它变得更酷一些！
 
-已经实现了一个 `demo`: [stackblitz](https://stackblitz.com/edit/ng-zorro-antd-auto-error-tip?file=src%2Fapp%2Fauto-error-tip.directive.ts)
+已经实现了一个 `demo`: 点击[stackblitz](https://stackblitz.com/edit/ng-zorro-antd-auto-error-tip?file=src%2Fapp%2Fauto-error-tip.directive.ts)查看
 
 ```ts
 // 核心代码如下
