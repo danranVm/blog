@@ -128,12 +128,12 @@ export type Getters = GetterHandler<GettersFuncMap>
 
 /** 将 MutationsFuncMap 的 key,value 转换成 Commit 函数的两个参数: type, payload */
 export interface Commit {
-  <T extends keyof CommitFuncMap>(type: T, payload?: Parameters<CommitFuncMap[T]>[1]): void
+  <T extends keyof MutationsFuncMap>(type: T, payload?: Parameters<MutationsFuncMap[T]>[1]): void
 }
 
 /** 将 ActionsFuncMap 的 key,value 转换成 Dispatch 函数的两个参数: type, payload */
 export interface Dispatch {
-  <T extends keyof DispatchFuncMap>(type: T, payload?: Parameters<DispatchFuncMap[T]>[1]): Promise<
+  <T extends keyof ActionsFuncMap>(type: T, payload?: Parameters<ActionsFuncMap[T]>[1]): Promise<
     any
   >
 }
