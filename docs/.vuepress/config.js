@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Vm Blog',
-  description: '一只喜欢编程和数码产品的程序猿',
+  description: '一只喜欢编程和电子产品的程序猿',
   dest: 'dist',
   locales: { '/': { lang: 'zh-cmn-Hans' } },
   head: [
