@@ -108,15 +108,15 @@ export interface State {}
 export type GettersFuncMap = {}
 
 /** 提取出所有 module 的 mutations 类型 */
-export type CommitFuncMap = {}
+export type MutationsFuncMap = {}
 
 /** 提取出所有 module 的 actions 类型 */
-export type DispatchFuncMap = {}
+export type ActionsFuncMap = {}
 ```
 
 ```ts
 // 新建 store-type.ts, 完成相关类型推导
-import { GettersFuncMap, CommitFuncMap, DispatchFuncMap, State } from './module-type'
+import { GettersFuncMap, MutationsFuncMap, ActionsFuncMap, State } from './module-type'
 
 /** Getter类型转换 Handler：GettersFuncMap => Getters */
 export type GetterHandler<T extends { [key: string]: (...args: any) => any }> = {
@@ -239,6 +239,25 @@ export const test = {
 }
 ```
 
+然后，我们需要修改一下 `module-type.ts`
+
+```ts
+import { test, test2 } from './modules/test'
+
+export interface State {
+  test: typeof test.state
+  test2: typeof test2.state
+}
+
+export type GettersFuncMap = typeof test.getters & typeof test2.getters
+
+export type MutationsFuncMap = typeof test.mutations & typeof test2.mutations
+
+export type ActionsFuncMap = typeof test.actions & typeof test2.actions
+```
+
+也就是说后续我们有新的 `module`, 也同样需要改动这几行代码。
+
 #### 在 `component` 中使用
 
 ```ts
@@ -267,7 +286,13 @@ export default class HelloWorld extends Vue {
 
 ## 总结
 
-至此，我们的改造就完成了，接下来我们就可以好好享受类型安全带来的愉快开发体验了。  
+至此，我们的改造就完成了，接下来我们就可以好好享受类型安全带来的愉快开发体验了。当前还遗留的两个没有解决的问题：
+
+- 无法覆盖默认的 `$store` 类型，只能通过新增一个 `_store` 去使用，对于强迫症患者可能还是有点不舒服。
+- 每次新增 `module`, 都需要修改 `module-type.ts` 文件。可以考虑写个脚本，读取 `modules` 目录下的文件，自动修改这个文件。
+
+对于以上两个问题，希望能有更好的解决方案。
+
 同时，我们也期待下 `Vue 3.0` 的快点到来吧，原汁原味的 `typescript` 支持，会比我们这种骚操作式的改造方案要靠谱，也更加通用一些。  
 最后，还记得那句名言吗？`Any application that can be written in JavaScript, will eventually be written in JavaScript`  
 那么，我现在希望的是：`Any application that can be written in JavaScript, will eventually be written in Typescript`
