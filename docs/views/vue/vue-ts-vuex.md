@@ -172,13 +172,13 @@ declare module 'vue/types/vue' {
 
 ```ts
 // 修改 main.ts
-const app = new Vue({
+Vue.prototype._store = store
+
+new Vue({
   router,
   store,
   render: h => h(App),
 }).$mount('#app')
-
-Vue.prototype._store = app.$store
 ```
 
 至此，我们已经完成了基础的类型推导工作，下面来让我们创建一个示例。
