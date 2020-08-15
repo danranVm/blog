@@ -52,13 +52,6 @@ module.exports = {
         email: 'recoluan@qq.com',
         link: 'https://www.recoluan.com',
       },
-      {
-        title: '有梦想的咸鱼',
-        desc: '我不能克制我记几',
-        link: 'https://blog.liudongyang.top',
-        email: '',
-        logo: 'https://blog.liudongyang.top/blog-logo.jpg',
-      },
     ],
     // 博客设置
     blogConfig: {

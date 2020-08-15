@@ -112,6 +112,11 @@ tags:
 
   ```bash
   nvm install 12.18.3
+  ```
+
+- 安装 nrm
+
+  ```bash
   npm install -g nrm
   nrm test
   nrm use taobao
