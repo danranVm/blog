@@ -27,6 +27,7 @@ tags:
 - 思维导图：XMind
 - 截图：Snipaste
 - 录屏：ScreenToGif
+- 图床：PicGo + Github
 - 播放器：PotPlayer
 - 其他：Shadowsocks、F.lux、MacType
 
