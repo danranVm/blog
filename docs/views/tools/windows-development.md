@@ -16,7 +16,6 @@ tags:
 
 ## 工具清单
 
-- 下载器：Xtreme Download Manager
 - 浏览器：Edge、Chrome
 - 编辑器：VS Code、Typora
 - 终端：Windows Terminal Preview、oh my zsh(WSL2)
@@ -38,7 +37,7 @@ tags:
 - 安装 wsl
 
   ```bash
-  // 管理员权限
+  # 管理员权限
   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
   ```
 
@@ -46,7 +45,7 @@ tags:
 - 启用 `Virtual Machine Platform`
 
   ```bash
-  // 管理员权限
+  # 管理员权限
   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
   ```
 
@@ -58,8 +57,9 @@ tags:
   wsl --set-default-version 2
   ```
 
-- 打开[Microsoft 应用商店](https://aka.ms/wslstore)下载相应的 linux 发行版
+- 打开[Microsoft 应用商店](https://aka.ms/wslstore)下载相应的 linux 发行版,
 - 安装完成后运行，设置用户名/密码即可
+- 以下都以 `Ubuntu-20.04` 为例
 
 ### 安装 oh my zsh
 
@@ -69,42 +69,48 @@ tags:
   sudo apt update
   sudo apt install zsh
   chsh -s /bin/zsh
-  // 重启 ubuntu
+  # 重启 ubuntu
   touch ~/.zshrc
   ```
 
 - 安装 oh my zsh
 
   ```bash
-  sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-  // 自动提示插件
+  # 自动提示插件
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-  // 高亮插件
+  # 高亮插件
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
   vim ~/.zshrc
 
-  // 添加插件
-  // plugins=(git  zsh-autosuggestions zsh-syntax-highlighting)
+  # 添加插件
+  plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
   source ~/.zshrc
   ```
 
-### node 环境
+### Terminal 默认使用 WSL
+
+- 打开 Terminal
+- 点击 **设置**
+- 将 `defaultProfile` 改成 WSL 的 `guid` 即可
+
+## node 环境
 
 - 安装 nvm
 
   ```bash
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 
   vim ~/.zshrc
 
-  // 添加环境变量
-  // export NVM_DIR="$HOME/.nvm"
-  // [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  // [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  # 添加环境变量
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
   source ~/.zshrc
   ```
@@ -112,7 +118,7 @@ tags:
 - 安装 node
 
   ```bash
-  nvm install 12.18.3
+  nvm install 14.15.1
   ```
 
 - 安装 nrm
@@ -123,22 +129,30 @@ tags:
   nrm use taobao
   ```
 
-### Terminal 默认使用 WSL
+## Git 配置
 
-- 打开 Terminal
-- 点击 **设置**
-- 将 `defaultProfile` 改成 WSL 的 `guid` 即可
+```bash
+git config --global user.name danranvm
+git config --global user.email danranvm@gmail.com
+
+ssh-keygen -t ed25519 -C "danranvm@gmail.com"
+#  ssh-keygen -t rsa -b 4096 -C "danranvm@gmail.com"
+cat ~/.ssh/id_rsa.pub
+```
 
 ## VS Code 插件
 
-- Local(Windows)
-  - Remote - WSL
+- LOCAL
   - Bracket Pair Colorizer 2
+  - Debugger for Chrome
+  - Remote - WSL
+  - Remote - SSH
   - vscode-icons
 - WSL:UBUNTU
   - Code Spell Checker
   - GitLens
   - Markdown Preview Enhanced
+  - Prettier - Code formatter
   - Todo Tree
 
 Tips: VS Code 已经内置了 `Setting Sync`
