@@ -118,7 +118,7 @@ tags:
 - 安装 node
 
   ```bash
-  nvm install 14.15.1
+  nvm install 12
   ```
 
 - 安装 nrm

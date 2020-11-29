@@ -23,5 +23,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           rm: 1
           source: 'dist'
-          target: '/usr/share/nginx/html/vm/blog'
+          target: '/usr/share/nginx/danran.site'
           strip_components: 1
