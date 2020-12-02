@@ -1,5 +1,5 @@
 ---
-title: Nginx 入门笔记
+title: Nginx Quickstart
 date: 2020-11-29
 categories:
   - Nginx
@@ -11,6 +11,8 @@ tags:
 ::: tip
 用 nginx 部署一个简单 web 项目: gizp, ssl 证书, http => https 等配置
 :::
+
+<!-- more -->
 
 ## 安装
 

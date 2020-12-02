@@ -1,10 +1,11 @@
 ---
-title: Windows 开发环境搭建
+title: Windows 开发环境搭建（WSL）
 date: 2020-08-15
 categories:
   - Windows
 tags:
   - Windows
+  - WSL
   - Development
 ---
 
