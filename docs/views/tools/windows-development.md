@@ -19,17 +19,20 @@ tags:
 
 - 浏览器：Edge、Chrome
 - 编辑器：VS Code、Typora
-- 终端：Windows Terminal Preview、oh my zsh(WSL2)
-- 效率工具：Everything、Wox、Quicker、Ditto
-- 待办清单：Microsoft To Do
-- 压缩：7-Zip
-- 词典：欧路词典
+- 终端：Windows Terminal Preview
+- IM: 微信、钉钉、口袋助理
+- Office: WPS
 - 思维导图：XMind
+- 待办清单：Microsoft To Do
+- 词典：欧路词典
+- 压缩：7-Zip
+- 粘贴板：Ditto
 - 截图：Snipaste
 - 录屏：ScreenToGif
-- 图床：PicGo + Github
+- 图床：PicGo
 - 播放器：PotPlayer
-- 其他：Shadowsocks、F.lux、MacType
+- 远程：TeamViewer
+- 其他：Clash for Windows、aTrust、SwitchHosts
 
 ## WSL 2 环境搭建
 
@@ -37,32 +40,20 @@ tags:
 
 - 安装 wsl
 
-  ```bash
-  # 管理员权限
-  dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-  ```
+  - 一键式命令
 
-- 重启系统
-- 启用 `Virtual Machine Platform`
+    ```bash
+    # 管理员权限,
+    wsl --install
+    # 如果遇到 Ubuntu 无法下载, 就结束进程，手动安装 Ubuntu
+    ```
+  - 重启系统
 
-  ```bash
-  # 管理员权限
-  dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-  ```
+- 安装 Ubuntu (第一步没有正常安装 Ubuntu 的情况下)
+  - 打开[Microsoft 应用商店](https://aka.ms/wslstore)下载相应的 linux 发行版
+  - 安装完成后运行，设置用户名/密码即可
 
-- 重启系统
-- 下载并安装 WSL 2 Linux 内核：[wsl_update_x64](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
-- 设置 WSL 2 为默认版本
-
-  ```bash
-  wsl --set-default-version 2
-  ```
-
-- 打开[Microsoft 应用商店](https://aka.ms/wslstore)下载相应的 linux 发行版,
-- 安装完成后运行，设置用户名/密码即可
-- 以下都以 `Ubuntu-20.04` 为例
-
-### 安装 oh my zsh
+### oh my zsh
 
 - 安装 zsh
 
@@ -70,13 +61,15 @@ tags:
   sudo apt update
   sudo apt install zsh
   chsh -s /bin/zsh
-  # 重启 ubuntu
-  touch ~/.zshrc
+  # 重启 ubuntu, 根据提示输入：0
   ```
 
 - 安装 oh my zsh
 
   ```bash
+  # 如果遇到网络原因无法直接通过 curl 安装，可以手动安装：
+  # 1. 下载 install.sh 文件，放入 wsl 中: //wsl$/Ubuntu/home/vm 
+  # 2. 执行 sh install.sh
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
   # 自动提示插件
@@ -88,7 +81,7 @@ tags:
   vim ~/.zshrc
 
   # 添加插件
-  plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+  plugins=(git z zsh-autosuggestions zsh-syntax-highlighting)
 
   source ~/.zshrc
   ```
@@ -97,21 +90,16 @@ tags:
 
 - 打开 Terminal
 - 点击 **设置**
-- 将 `defaultProfile` 改成 WSL 的 `guid` 即可
+- 将 `defaultProfile` 改成 WSL 的 `guid` 
+- 设置默认打开路径为 WSL 路径：`"startingDirectory": "//wsl$/Ubuntu/home/vm"`
 
 ## node 环境
 
 - 安装 nvm
 
   ```bash
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-
-  vim ~/.zshrc
-
-  # 添加环境变量
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  # 如果遇到网络原因无法直接通过 curl 安装，可以手动安装, 参考 oh my zsh
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
   source ~/.zshrc
   ```
@@ -119,14 +107,29 @@ tags:
 - 安装 node
 
   ```bash
-  nvm install 12
+  # 查看所有版本
+  nvm ls-remote
+
+  # 安装指定版本
+  nvm install 16
+
+  # 或者也可以选择安装最后一个版本
+  # nvm install node
+  ```
+
+- 安装 pnpm
+
+  ```bash
+  curl -fsSL https://get.pnpm.io/install.sh | sh -
   ```
 
 - 安装 nrm
 
   ```bash
   npm install -g nrm
+
   nrm test
+
   nrm use taobao
   ```
 
@@ -137,27 +140,24 @@ git config --global user.name danranvm
 git config --global user.email danranvm@gmail.com
 
 ssh-keygen -t ed25519 -C "danranvm@gmail.com"
-#  ssh-keygen -t rsa -b 4096 -C "danranvm@gmail.com"
-cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_ed25519.pub
 ```
 
 ## VS Code 插件
 
 - LOCAL
-  - Bracket Pair Colorizer 2
-  - Debugger for Chrome
   - Remote - WSL
   - Remote - SSH
   - vscode-icons
+  - Markdown Preview Enhanced / Slidev
 - WSL:UBUNTU
+  - Angular Language Service
   - Code Spell Checker
+  - ESLint
+  - GitHub Copilot
   - GitLens
-  - Markdown Preview Enhanced
-  - Prettier - Code formatter
+  - Prettier
   - Todo Tree
+  - Volar
 
 Tips: VS Code 已经内置了 `Setting Sync`
-
-## 完成
-
-至此，Windows 开发环境基本上搭建完毕，但愿 WSL2 不要让我失望，让我少踩点坑。
