@@ -10,7 +10,7 @@ tags:
 ---
 
 ::: tip
-个人在 Windows 下的工具清单和开发环境。
+个人在 Windows 下的工具清单和开发环境，部分安装命令需要在科学上网环境下使用。
 :::
 
 <!-- more -->
@@ -24,15 +24,15 @@ tags:
 - Office: WPS
 - 思维导图：XMind
 - 待办清单：Microsoft To Do
-- 词典：欧路词典
+- 词典：有道词典
 - 压缩：7-Zip
 - 粘贴板：Ditto
 - 截图：Snipaste
 - 录屏：ScreenToGif
 - 图床：PicGo
 - 播放器：PotPlayer
-- 远程：TeamViewer
-- 其他：Clash for Windows、aTrust、SwitchHosts
+- 远程：ToDesk
+- 其他：Clash for Windows、SwitchHosts
 
 ## WSL 2 环境搭建
 
@@ -99,7 +99,7 @@ tags:
 
   ```bash
   # 如果遇到网络原因无法直接通过 curl 安装，可以手动安装, 参考 oh my zsh
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 
   source ~/.zshrc
   ```
@@ -121,6 +121,8 @@ tags:
 
   ```bash
   curl -fsSL https://get.pnpm.io/install.sh | sh -
+  
+  source ~/.zshrc
   ```
 
 - 安装 nrm
@@ -131,6 +133,12 @@ tags:
   nrm test
 
   nrm use taobao
+  ```
+
+- 安装 http-server
+
+  ```bash
+  npm install -g http-server
   ```
 
 ## Git 配置
